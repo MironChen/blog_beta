@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>mironchen.me/update/index.html</loc>
+    
+    <lastmod>2019-01-12T14:38:45.825Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>mironchen.me/2019/01/12/monkey/</loc>
     
-    <lastmod>2019-01-12T11:55:21.251Z</lastmod>
+    <lastmod>2019-01-12T14:36:36.874Z</lastmod>
     
   </url>
   
@@ -54,13 +61,6 @@
     <loc>mironchen.me/2018/07/15/1-year/</loc>
     
     <lastmod>2018-07-17T14:26:58.102Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>mironchen.me/update/index.html</loc>
-    
-    <lastmod>2018-07-04T14:39:33.325Z</lastmod>
     
   </url>
   
