@@ -352,6 +352,10 @@
     </nav>
 
     
+    <div class="inner">
+        <div id="comment"></div>
+    </div>
+    
 </div>
 
 <div class="toc-bar">
@@ -531,6 +535,24 @@
 
 
 
+
+<script async src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script async src="https://unpkg.com/valine@1.3.4/dist/Valine.min.js"></script>
+<script>
+    window.addEventListener("load", function() {
+        new Valine({
+            el: '#comment' ,
+            verify: false,
+            notify: false,
+            appId: 'friEUoGdp2yKtheRITaNRBNG-MdYXbMMI',
+            appKey: 'yOFDsixydafDtuLvKAuRi6VT',
+            placeholder: '想说点什么？',
+            pageSize: 10,
+            avatar: 'mm',
+            visitor: true,
+        })
+    });
+</script>
 
 
 
