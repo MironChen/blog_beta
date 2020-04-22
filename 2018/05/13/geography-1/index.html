@@ -10,7 +10,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="preconnect" href="//pic.zhih.me">
 	<link rel="preconnect" href="//www.googletagmanager.com">
 	<link rel="preconnect" href="//zz.bdstatic.com">
 	<link rel="preconnect" href="//sp0.baidu.com">
@@ -20,7 +19,6 @@
 	<link rel="preconnect" href="//app-router.leancloud.cn">
 	<link rel="preconnect" href="//9qpuwspm.api.lncld.net">
 	<link rel="preconnect" href="//gravatar.loli.net">
-	<link rel="preload" href="https://pic.zhih.me/blog/header.jpg" as="image">
 
 	<title>课外地理知识点 | 诗词 | Miron Chen</title>
 
@@ -67,13 +65,8 @@
 	
 	
 	
-<link rel="canonical" href="mironchen.me/2018/05/13/geography-1/">
-
-
-
-
-
 </head>
+
 <body class="post-template">
 	<div class="site-wrapper">
 		
@@ -174,7 +167,7 @@
             </figure>
             
             <div class="post-full-content">
-                <article id="lightgallery" class="markdown-body">
+                <article id="photoswipe" class="markdown-body">
                     <h2 id="下面的诗词，你都知道是什么意思吗？"><a href="#下面的诗词，你都知道是什么意思吗？" class="headerlink" title="下面的诗词，你都知道是什么意思吗？"></a>下面的诗词，你都知道是什么意思吗？</h2><p>&ensp;<br><blockquote><p>高处不胜寒</p>
 <footer><strong>苏轼</strong><cite>《水调歌头》</cite></footer></blockquote></p>
 <p><strong>解析</strong>: 此句说明随海拔高度的增加，气温逐渐降低。一般情况下，在对流层里，海拔每升高100米，气温下降0.6℃。在高空，由于距离地面远，大气吸收的地面辐射少，气温低。在海拔高的地区（如青藏高原），由于空气稀薄，大气逆辐射弱，大气对地面的保温作用小，气温低。<br>&ensp;</p>
@@ -297,6 +290,76 @@
 
 
 
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
 	</div>
 	
 
@@ -392,7 +455,9 @@
 <div id="search" class="search-overlay">
     <div class="search-form">
         
-        <img class="search-overlay-logo" src="https://i.loli.net/2019/06/16/5d05b631026c837502.jpg" alt="Miron Chen">
+        <div class="search-overlay-logo">
+        	<img src="https://i.loli.net/2019/06/16/5d05b631026c837502.jpg" alt="Miron Chen">
+        </div>
         
         <input id="local-search-input" class="search-input" type="text" name="search" placeholder="搜索 ...">
         <a class="search-overlay-close" href="#"></a>
@@ -403,8 +468,15 @@
 <footer class="site-footer outer">
 	<div class="site-footer-content inner">
 		<div class="copyright">
-			<a href="/" title="Miron Chen">Miron Chen</a>
-			&copy; 2020
+			<a href="/" title="Miron Chen">Miron Chen &copy; 2020</a>
+			
+				
+			        <span hidden="true" id="/2018/05/13/geography-1/" class="leancloud-visitors" data-flag-title="课外地理知识点 | 诗词">
+			            <span>阅读量 </span>
+			            <span class="leancloud-visitors-count">0</span>
+			        </span>
+	    		
+    		
 		</div>
 		<nav class="site-footer-nav">
 			
@@ -416,43 +488,52 @@
 	
 
 
-<script>if(window.navigator && navigator.serviceWorker) {navigator.serviceWorker.getRegistrations().then(function(registrations) {for(let registration of registrations) {registration.unregister()}})}</script>
+<script>
+    if(window.navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+</script>
 
 
-<script async src="/js/allinone.min.js" id="scriptLoad"></script>
-
-
-
-
+<script id="scriptLoad" src="/js/allinone.min.js" async></script>
 
 
 <script>
     document.getElementById('scriptLoad').addEventListener('load', function () {
-        var bLazy = new Blazy()
+        
+        
+            var bLazy = new Blazy();
+        
+
+        
+        
+
+        
+        
+        
+            searchFunc("/");
+        
+        
     })
 </script>
 
 
 
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
 
 
 
 
-<script src="/js/lightgallery.min.js"></script>
-<link rel="stylesheet" href="/css/lightgallery.min.css">
+<script id="valineScript" src="//unpkg.com/valine/dist/Valine.min.js" async></script>
 <script>
-    lightGallery(document.getElementById('lightgallery'), {
-        selector: '.post-img'
-    });
-</script>
-
-
-
-
-<script async src="https://cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script async src="https://unpkg.com/valine@1.3.4/dist/Valine.min.js"></script>
-<script>
-    window.addEventListener("load", function() {
+    document.getElementById('valineScript').addEventListener("load", function() {
         new Valine({
             el: '#comment' ,
             verify: false,
@@ -462,21 +543,10 @@
             placeholder: '想说点什么？',
             pageSize: 10,
             avatar: 'mm',
-            visitor: true,
+            visitor: true
         })
     });
 </script>
-
-
-
-
-
-<script>
-    document.getElementById('scriptLoad').addEventListener('load', function(){
-        searchFunc("/")
-    });
-</script>
-
 
 
 

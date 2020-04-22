@@ -1,9 +1,80 @@
 /*!
- * smooth-scroll v15.1.0: Animate scrolling to anchor links
- * (c) 2018 Chris Ferdinandi
+ * smooth-scroll v16.1.0
+ * Animate scrolling to anchor links
+ * (c) 2019 Chris Ferdinandi
  * MIT License
  * http://github.com/cferdinandi/smooth-scroll
  */
+
+/**
+ * closest() polyfill
+ * @link https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
+ */
+if (window.Element && !Element.prototype.closest) {
+	Element.prototype.closest = function(s) {
+		var matches = (this.document || this.ownerDocument).querySelectorAll(s),
+			i,
+			el = this;
+		do {
+			i = matches.length;
+			while (--i >= 0 && matches.item(i) !== el) {}
+		} while ((i < 0) && (el = el.parentElement));
+		return el;
+	};
+}
+
+/**
+ * CustomEvent() polyfill
+ * https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent/CustomEvent#Polyfill
+ */
+(function () {
+
+	if (typeof window.CustomEvent === "function") return false;
+
+	function CustomEvent(event, params) {
+		params = params || { bubbles: false, cancelable: false, detail: undefined };
+		var evt = document.createEvent('CustomEvent');
+		evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+		return evt;
+	}
+
+	CustomEvent.prototype = window.Event.prototype;
+
+	window.CustomEvent = CustomEvent;
+})();
+/**
+ * requestAnimationFrame() polyfill
+ * By Erik Möller. Fixes from Paul Irish and Tino Zijdel.
+ * @link http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+ * @link http://my.opera.com/emoller/blog/2011/12/20/requestanimationframe-for-smart-er-animating
+ * @license MIT
+ */
+(function() {
+	var lastTime = 0;
+	var vendors = ['ms', 'moz', 'webkit', 'o'];
+	for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+		window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+		window.cancelAnimationFrame = window[vendors[x]+'CancelAnimationFrame'] ||
+		                              window[vendors[x]+'CancelRequestAnimationFrame'];
+	}
+
+	if (!window.requestAnimationFrame) {
+		window.requestAnimationFrame = function(callback, element) {
+			var currTime = new Date().getTime();
+			var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+			var id = window.setTimeout((function() { callback(currTime + timeToCall); }),
+				timeToCall);
+			lastTime = currTime + timeToCall;
+			return id;
+		};
+	}
+
+	if (!window.cancelAnimationFrame) {
+		window.cancelAnimationFrame = function(id) {
+			clearTimeout(id);
+		};
+	}
+}());
 
 (function (root, factory) {
 	if (typeof define === 'function' && define.amd) {
@@ -89,7 +160,7 @@
 	 * Check to see if user prefers reduced motion
 	 * @param  {Object} settings Script settings
 	 */
-	var reduceMotion = function (settings) {
+	var reduceMotion = function () {
 		if ('matchMedia' in window && window.matchMedia('(prefers-reduced-motion)').matches) {
 			return true;
 		}
@@ -196,13 +267,7 @@
 		}
 
 		// Return sanitized hash
-		var hash;
-		try {
-			hash = decodeURIComponent('#' + result);
-		} catch(e) {
-			hash = '#' + result;
-		}
-		return hash;
+		return '#' + result;
 
 	};
 
@@ -291,7 +356,7 @@
 		var speed = settings.speedAsDuration ? settings.speed : Math.abs(distance / 1000 * settings.speed);
 		if (settings.durationMax && speed > settings.durationMax) return settings.durationMax;
 		if (settings.durationMin && speed < settings.durationMin) return settings.durationMin;
-		return speed;
+		return parseInt(speed, 10);
 	};
 
 	var setHistory = function (options) {
@@ -301,7 +366,7 @@
 
 		// Get the hash to use
 		var hash = window.location.hash;
-		hash = hash ? hash : window.pageYOffset;
+		hash = hash ? hash : '';
 
 		// Set a default history
 		history.replaceState(
@@ -424,6 +489,9 @@
 		 */
 		smoothScroll.animateScroll = function (anchor, toggle, options) {
 
+			// Cancel any in progress scrolls
+			smoothScroll.cancelScroll();
+
 			// Local settings
 			var _settings = extend(settings || defaults, options || {}); // Merge user options with defaults
 
@@ -482,7 +550,7 @@
 			var loopAnimateScroll = function (timestamp) {
 				if (!start) { start = timestamp; }
 				timeLapsed += timestamp - start;
-				percentage = (timeLapsed / parseInt(speed, 10));
+				percentage = speed === 0 ? 0 : (timeLapsed / speed);
 				percentage = (percentage > 1) ? 1 : percentage;
 				position = startLocation + (distance * easingPattern(_settings, percentage));
 				window.scrollTo(0, Math.floor(position));
@@ -503,6 +571,12 @@
 			// Update the URL
 			updateURL(anchor, isNum, _settings);
 
+			// If the user prefers reduced motion, jump to location
+			if (reduceMotion()) {
+				window.scrollTo(0, Math.floor(endLocation));
+				return;
+			}
+
 			// Emit a custom event
 			emitEvent('scrollStart', _settings, anchor, toggle);
 
@@ -517,15 +591,16 @@
 		 */
 		var clickHandler = function (event) {
 
-			// Don't run if the user prefers reduced motion
-			if (reduceMotion(settings)) return;
+			// Don't run if event was canceled but still bubbled up
+			// By @mgreter - https://github.com/cferdinandi/smooth-scroll/pull/462/
+			if (event.defaultPrevented) return;
 
-			// Don't run if right-click or command/control + click
-			if (event.button !== 0 || event.metaKey || event.ctrlKey) return;
+			// Don't run if right-click or command/control + click or shift + click
+			if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey) return;
 
 			// Check if event.target has closest() method
 			// By @totegi - https://github.com/cferdinandi/smooth-scroll/pull/401/
-			if(!('closest' in event.target))return;
+			if (!('closest' in event.target)) return;
 
 			// Check if a smooth scroll link was clicked
 			toggle = event.target.closest(selector);
@@ -538,7 +613,13 @@
 			var hash = escapeCharacters(decode(toggle.hash));
 
 			// Get the anchored element
-			var anchor = settings.topOnEmptyHash && hash === '#' ? document.documentElement : document.querySelector(hash);
+			var anchor;
+			if (hash === '#') {
+				if (!settings.topOnEmptyHash) return;
+				anchor = document.documentElement;
+			} else {
+				anchor = document.querySelector(hash);
+			}
 			anchor = !anchor && hash === '#top' ? document.documentElement : anchor;
 
 			// If anchored element exists, scroll to it
@@ -567,7 +648,7 @@
 
 			// Get the anchor
 			var anchor = history.state.anchor;
-			if (anchor && anchor !== 0) {
+			if (typeof anchor === 'string' && anchor) {
 				anchor = document.querySelector(escapeCharacters(decode(history.state.anchor)));
 				if (!anchor) return;
 			}
@@ -606,7 +687,7 @@
 		 * Initialize Smooth Scroll
 		 * @param {Object} options User settings
 		 */
-		smoothScroll.init = function (options) {
+		var init = function () {
 
 			// feature test
 			if (!supports()) throw 'Smooth Scroll: This browser does not support the required JavaScript methods and browser APIs.';
@@ -633,7 +714,7 @@
 		// Initialize plugin
 		//
 
-		smoothScroll.init(options);
+		init();
 
 
 		//

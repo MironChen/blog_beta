@@ -10,7 +10,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<link rel="preconnect" href="//pic.zhih.me">
 	<link rel="preconnect" href="//www.googletagmanager.com">
 	<link rel="preconnect" href="//zz.bdstatic.com">
 	<link rel="preconnect" href="//sp0.baidu.com">
@@ -20,7 +19,6 @@
 	<link rel="preconnect" href="//app-router.leancloud.cn">
 	<link rel="preconnect" href="//9qpuwspm.api.lncld.net">
 	<link rel="preconnect" href="//gravatar.loli.net">
-	<link rel="preload" href="https://pic.zhih.me/blog/header.jpg" as="image">
 
 	<title>归档 | Miron Chen</title>
 
@@ -63,9 +61,8 @@
 	
 	
 	
-
-
 </head>
+
 <body class="tag-template">
 	<div class="site-wrapper">
 		
@@ -183,6 +180,7 @@
 						</header>
 						<div class="post-card-excerpt">
 							<p>
+								
 								
 								
 								
@@ -322,7 +320,9 @@
 <div id="search" class="search-overlay">
     <div class="search-form">
         
-        <img class="search-overlay-logo" src="https://i.loli.net/2019/06/16/5d05b631026c837502.jpg" alt="Miron Chen">
+        <div class="search-overlay-logo">
+        	<img src="https://i.loli.net/2019/06/16/5d05b631026c837502.jpg" alt="Miron Chen">
+        </div>
         
         <input id="local-search-input" class="search-input" type="text" name="search" placeholder="搜索 ...">
         <a class="search-overlay-close" href="#"></a>
@@ -333,8 +333,8 @@
 <footer class="site-footer outer">
 	<div class="site-footer-content inner">
 		<div class="copyright">
-			<a href="/" title="Miron Chen">Miron Chen</a>
-			&copy; 2020
+			<a href="/" title="Miron Chen">Miron Chen &copy; 2020</a>
+			
 		</div>
 		<nav class="site-footer-nav">
 			
@@ -346,40 +346,42 @@
 	
 
 
-<script>if(window.navigator && navigator.serviceWorker) {navigator.serviceWorker.getRegistrations().then(function(registrations) {for(let registration of registrations) {registration.unregister()}})}</script>
+<script>
+    if(window.navigator && navigator.serviceWorker) {
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister()
+            }
+        })
+    }
+</script>
 
 
-<script async src="/js/allinone.min.js" id="scriptLoad"></script>
-
+<script id="scriptLoad" src="/js/allinone.min.js" async></script>
 
 
 <script>
     document.getElementById('scriptLoad').addEventListener('load', function () {
-        var bLazy = new Blazy()
+        
+        
+            var bLazy = new Blazy();
+        
+
+        
+        
+
+        
+        
+        
+            searchFunc("/");
+        
+        
     })
 </script>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-    document.getElementById('scriptLoad').addEventListener('load', function(){
-        searchFunc("/")
-    });
-</script>
 
 
 
