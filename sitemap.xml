@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>mironchen.me/terms/index.html</loc>
+    
+    <lastmod>2020-04-26T13:01:16.139Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>mironchen.me/policy/index.html</loc>
+    
+    <lastmod>2020-04-26T12:49:49.872Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>mironchen.me/update/index.html</loc>
+    
+    <lastmod>2020-04-26T09:25:47.460Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>mironchen.me/2018/03/03/Update-1/</loc>
     
     <lastmod>2020-04-26T09:03:33.413Z</lastmod>
@@ -47,13 +68,6 @@
     <loc>mironchen.me/about/index.html</loc>
     
     <lastmod>2019-01-16T13:43:55.291Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>mironchen.me/update/index.html</loc>
-    
-    <lastmod>2019-01-12T14:38:45.825Z</lastmod>
     
   </url>
   
